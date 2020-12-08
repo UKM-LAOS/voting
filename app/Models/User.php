@@ -71,4 +71,10 @@ class User extends Authenticatable
             : static::where('name', 'like', '%'.$query.'%')
                 ->orWhere('email', 'like', '%'.$query.'%');
     }
+    public function userVerification(){
+        return $this->hasOne('App\Models\UserVerification','user_id');
+    }
+    public function vote(){
+        return $this->hasOne('App\Models\Vote','user_id');
+    }
 }

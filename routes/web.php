@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserVerification;
+use App\Http\Controllers\Verification;
+use App\Http\Controllers\VoteCandidate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
@@ -23,15 +27,18 @@ Route::get('/dashboard', function () {
     return redirect(route('admin.dashboard'));
 });
 
+Route::get('profile/show',function (){return redirect(route('admin.profile.show'));})->name('profile.show');
+
 Route::get('/', function () {
-    return view('welcome');
-});
-//[ 'middleware' => [],'prefix'=>'admin' ]
-//Route::name('admin.')->middleware(['auth:sanctum', 'verified'])->prefix('admin/')->group(function() {
-Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum','web', 'verified'])->group(function() {
-    Route::view('/dashboard', "dashboard")->name('dashboard');
-//    Route::middleware(['checkRole:1']){}
-    Route::get('/user', [ UserController::class, "index" ])->name('user');
+    return redirect(route('admin.dashboard'));
+})->name('welcome');
+Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum', 'web', 'verified'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/user', [UserController::class, "index"])->name('user');
     Route::view('/user/new', "pages.user.create")->name('user.new');
     Route::view('/user/edit/{userId}', "pages.user.edit")->name('user.edit');
 
@@ -55,5 +62,9 @@ Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum','web', 'verif
             }
         });
     });
+
+    Route::resource('user-verification', UserVerification::class);
+    Route::resource('vote-candidate', VoteCandidate::class);
+    Route::resource('verification', Verification::class);
 
 });

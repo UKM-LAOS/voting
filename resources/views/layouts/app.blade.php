@@ -40,6 +40,13 @@
                 <!-- Main Content -->
                 <div class="main-content">
                     <section class="section">
+                        @if (session('status'))
+                            <div class="container mt-3">
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            </div>
+                        @endif
                       <div class="section-header">
                         @isset($header_content)
                             {{ $header_content }}

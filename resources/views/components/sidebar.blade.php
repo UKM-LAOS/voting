@@ -2,23 +2,48 @@
 $links = [
     [
         "href" => "admin.dashboard",
-        "text" => "Dashboard",
+        "section_text" => "Dashboard",
+        "text" =>'dashboard',
         "is_multi" => false,
+        "icon"=>'fas fa-fire'
     ],
+
     [
+        "href" => "admin.vote-candidate.index",
+        "section_text" => "Pemilu",
+        "text" => "Pemilu  Ketua UKM LAOS",
+        "is_multi" => false,
+        "icon"=>'fas fa-file'
+    ],
+
+];
+if (Auth::user()->role==4){
+    $data=[
+        "href" => "admin.user-verification.index",
+        "section_text" => "Verification",
+        "text" => "Verification",
+        "is_multi" => false,
+        "icon"=>'fas fa-file'
+    ];
+    array_push($links,$data);
+}
+if (Auth::user()->role==1){
+    $data=[
         "href" => [
             [
                 "section_text" => "User",
                 "section_list" => [
                     ["href" => "admin.user", "text" => "Data User"],
-                    ["href" => "admin.user.new", "text" => "Buat User"]
+                    ["href" => "admin.user.new", "text" => "Buat User"],
+                    ["href" => "admin.verification.index", "text" => "Verification User"]
                 ]
             ]
         ],
         "text" => "User",
         "is_multi" => true,
-    ],
-];
+    ];
+    array_push($links,$data);
+}
 $navigation_links = array_to_object($links);
 @endphp
 
@@ -29,7 +54,7 @@ $navigation_links = array_to_object($links);
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin.dashboard') }}">
-                <img class="d-inline-block" width="32px" height="30.61px" src="" alt="">
+                <img class="d-inline-block" width="32px" height="30.61px" src="{{asset('image/logo.png')}}" alt="">
             </a>
         </div>
         @foreach ($navigation_links as $link)
@@ -37,7 +62,7 @@ $navigation_links = array_to_object($links);
             <li class="menu-header">{{ $link->text }}</li>
             @if (!$link->is_multi)
             <li class="{{ Request::routeIs($link->href) ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route($link->href) }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <a class="nav-link" href="{{ route($link->href) }}"><i class="{{$link->icon}}"></i><span>{{ $link->section_text }}</span></a>
             </li>
             @else
                 @foreach ($link->href as $section)
