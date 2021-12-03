@@ -20,6 +20,7 @@ class CreateCandidateTable extends Migration
             $table->integer('year');
             $table->text('visi');
             $table->text('misi');
+            $table->text('image');
             $table->timestamps();
         });
     }

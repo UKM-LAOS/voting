@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $year
  * @property string $visi
  * @property string $misi
+ * @property string $image
  * @property string $created_at
  * @property string $updated_at
  * @property Vote[] $votes
@@ -27,7 +28,7 @@ class Candidate extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'program_study', 'year', 'visi', 'misi', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'program_study', 'year', 'visi', 'misi', 'image', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
