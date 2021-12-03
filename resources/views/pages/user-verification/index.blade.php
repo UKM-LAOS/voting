@@ -17,8 +17,8 @@
                 @csrf
                 @method('put')
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="name">{{__('Nama Lengkap')}}</label>
-                <input type="text" class="mt-1 block w-full form-control shadow-none @error('full_name') is-invalid @enderror" name="full_name" value="{{$user->full_name}}" {{$user->status==2?'disabled':''}}/>
+                <label for="full_name">{{__('Nama Lengkap')}}</label>
+                <input type="text" class="mt-1 block w-full form-control shadow-none @error('full_name') is-invalid @enderror" name="full_name" id="full_name" value="{{$user->full_name}}" {{$user->status==2?'disabled':''}}/>
                 @error('full_name')
                 <div id="validationServer03Feedback"
                      class="invalid-feedback"> {{'Silakan isi nama lengkap!'}} </div>
@@ -26,8 +26,8 @@
             </div>
 
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="name">{{__('NIM')}}</label>
-                <input type="number" class="mt-1 block w-full form-control shadow-none @error('nim') is-invalid @enderror" name="nim" value="{{$user->nim}}" {{$user->status==2?'disabled':''}} />
+                <label for="nim">{{__('NIM')}}</label>
+                <input type="number" class="mt-1 block w-full form-control shadow-none @error('nim') is-invalid @enderror" name="nim" id="nim" value="{{$user->nim}}" {{$user->status==2?'disabled':''}} />
                 @error('nim')
                 <div id="validationServer03Feedback"
                      class="invalid-feedback"> {{'Silakan isi nim!'}} </div>
@@ -35,8 +35,8 @@
             </div>
 
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="name">{{__('Angkatan')}}</label>
-                <input type="number" class="mt-1 block w-full form-control shadow-none @error('year') is-invalid @enderror" name="year" value="{{$user->year}}" {{$user->status==2?'disabled':''}}/>
+                <label for="year">{{__('Angkatan')}}</label>
+                <input type="number" class="mt-1 block w-full form-control shadow-none @error('year') is-invalid @enderror" name="year" id="year" value="{{$user->year}}" {{$user->status==2?'disabled':''}}/>
                 @error('year')
                 <div id="validationServer03Feedback"
                      class="invalid-feedback"> {{'Silakan isi angkatan!'}} </div>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="name">{{__('Program Study')}}</label>
+                <label for="program_study">{{__('Program Studi')}}</label>
                 <select name="program_study" id="program_study" class="t-1 block w-full form-control shadow-none @error('program_study') is-invalid @enderror" {{$user->status==2?'disabled':''}}>
                     <option {{$user->program_study=="Sistem Informasi" ? 'selected':''}} value="Sistem Informasi">Sistem Informasi</option>
                     <option {{$user->program_study=="Teknologi Informasi" ? 'selected':''}} value="Teknologi Informasi">Teknologi Informasi</option>
@@ -53,8 +53,8 @@
             </div>
 
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="name">{{__('Foto bersama KTM atau ss biodata sister')}}</label>
-                <input type="file" class="mt-1 block w-full form-control shadow-none @error('file') is-invalid @enderror" name="file" {{$user->status==2?'disabled':''}}/>
+                <label for="file">{{__('Foto bersama KTM atau screenshot biodata SISTER')}}</label>
+                <input type="file" class="mt-1 block w-full form-control shadow-none @error('file') is-invalid @enderror" name="file" id="file" {{$user->status==2?'disabled':''}}/>
                 <img src="{{asset('storage/user-verification/'.$user->image)}}" style="max-height: 200px" alt="masih belum terisi">
                 @error('file')
                 <div id="validationServer03Feedback"
@@ -63,17 +63,17 @@
             </div>
 
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="name">{{__('No wa')}}</label>
-                <input type="text" class="mt-1 block w-full form-control shadow-none @error('no_wa') is-invalid @enderror" name="no_wa" value="{{$user->no_wa}}" {{$user->status==2?'disabled':''}}/>
+                <label for="no_wa">{{__('Nomor WhatsApp')}}</label>
+                <input type="text" class="mt-1 block w-full form-control shadow-none @error('no_wa') is-invalid @enderror" name="no_wa" id="no_wa" value="{{$user->no_wa}}" {{$user->status==2?'disabled':''}}/>
                 @error('no_wa')
                 <div id="validationServer03Feedback"
-                     class="invalid-feedback"> {{'Silakan isi no wa!'}} </div>
+                     class="invalid-feedback"> {{'Silakan isi nomor WhatsApp!'}} </div>
                 @enderror
             </div>
 
                 @if(Auth::user()->role==1)
                     <div class="form-group col-span-6 sm:col-span-5">
-                        <label for="name">{{__('Program Study')}}</label>
+                        <label for="status">{{__('Status verifikasi')}}</label>
                         <select name="status" id="status" class="t-1 block w-full form-control shadow-none @error('program_study') is-invalid @enderror" {{$user->status==2?'disabled':''}}>
                             <option {{$user->status==0 ? 'selected':''}} value="0">Belum mengisi form</option>
                             <option {{$user->status==1 ? 'selected':''}} value="1">Menunggu verifikasi admin</option>
