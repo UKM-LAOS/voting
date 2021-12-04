@@ -37,4 +37,10 @@ class Candidate extends Model
     {
         return $this->hasMany('App\Models\Vote');
     }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('name', 'like', '%'.$query.'%');
+    }
 }

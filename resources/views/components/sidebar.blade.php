@@ -29,6 +29,15 @@ if (Auth::user()->role==4){
 }
 if (Auth::user()->role==1){
     $data=[
+        "href" => "admin.candidate.index",
+        "section_text" => "Data Kandidat",
+        "text" => "Kandidat",
+        "is_multi" => false,
+        "icon"=>'fas fa-file'
+    ];
+    array_push($links,$data);
+
+    $data=[
         "href" => [
             [
                 "section_text" => "User",

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserVerification;
 use App\Http\Controllers\Verification;
@@ -66,5 +67,6 @@ Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum', 'web', 'veri
     Route::resource('user-verification', UserVerification::class);
     Route::resource('vote-candidate', VoteCandidate::class);
     Route::resource('verification', Verification::class);
+    Route::resource('candidate', CandidateController::class);
 
 });
