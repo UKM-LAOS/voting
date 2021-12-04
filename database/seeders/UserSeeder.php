@@ -14,11 +14,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $id = DB::table('users')->insertGetId([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'role' => 1,
             'password' => '$2y$10$VeoEoOdEfeulqcyDOqnm/esM678riBjnjenhgOfA12wY0VpjMHS5S', // 'password' without quote, change ASAP.
+        ]);
+
+        DB::table('user_verifications')->insert([
+            'user_id'=>$id,
+
         ]);
     }
 }
