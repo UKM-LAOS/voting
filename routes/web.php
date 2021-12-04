@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserVerification;
 use App\Http\Controllers\Verification;
 use App\Http\Controllers\VoteCandidate;
+use \App\Http\Controllers\HasilVote;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
@@ -68,5 +69,6 @@ Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum', 'web', 'veri
     Route::resource('vote-candidate', VoteCandidate::class);
     Route::resource('verification', Verification::class);
     Route::resource('candidate', CandidateController::class);
+    Route::resource('hasil-vote', HasilVote::class);
     Route::view('/candidate/edit/{candidateId}', "pages.candidate.edit")->name('candidate.edit');
 });

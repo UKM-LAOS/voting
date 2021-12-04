@@ -27,6 +27,7 @@ class VoteCandidate extends Controller
         return view('pages.vote.index',compact('candidates'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
