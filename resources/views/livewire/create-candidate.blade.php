@@ -45,8 +45,13 @@
 
             <div class="form-group col-span-6 sm:col-span-5">
                 <x-jet-label for="file" value="{{ __('Foto kandidat') }}" />
+                @if ($action == "createCandidate")
                 <x-jet-input type="file" class="mt-1 block w-full form-control shadow-none p-2" name="file" id="file" wire:model.defer="candidate.file"/>
                 <x-jet-input-error for="candidate.file" class="mt-2" />
+                @else
+                    <img src="/storage/candidate/{{$candidate['image']}}" alt="Foto kandidat {{$candidate['name']}}" width="100">
+                    <small>Untuk mengubah foto, hapus kandidat dan buat kandidat baru</small>
+                @endif
             </div>
 
         </x-slot>

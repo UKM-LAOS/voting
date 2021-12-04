@@ -11,6 +11,7 @@ class CreateCandidate extends Component
     use WithFileUploads;
 
     public $candidate;
+    public $candidateId;
     public $action;
     public $button;
 
@@ -21,15 +22,20 @@ class CreateCandidate extends Component
 
     protected function getRules()
     {
-        return [
+        $rules = [];
+        if ($this->action == "createCandidate") {
+            $rules = [
+                'candidate.image' => 'image|max:2048',
+            ];
+        }
+        return array_merge([
             'candidate.name' => 'required|min:3',
-            'candidate.image' => 'image|max:2048',
             'candidate.program_study' => 'required',
             'candidate.year' => 'required',
             'candidate.visi' => 'required',
             'candidate.misi' => 'required',
 
-        ];
+        ], $rules);
     }
 
     public function createCandidate() {
@@ -51,8 +57,25 @@ class CreateCandidate extends Component
 
     }
 
+    public function updateCandidate() {
+        $this->resetErrorBag();
+        $this->validate();
+
+        unset($this->candidate['created_at']);
+        unset($this->candidate['updated_at']);
+
+        Candidate::query()->where('id', $this->candidateId)->update($this->candidate);
+
+        $this->emit('saved');
+    }
+
     public function mount ()
     {
+        if (!!$this->candidateId) {
+            $candidate = Candidate::find($this->candidateId);
+
+            $this->candidate = $candidate->toArray();
+        }
         $this->button = create_button($this->action, "Candidate");
     }
 }

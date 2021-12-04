@@ -68,5 +68,5 @@ Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum', 'web', 'veri
     Route::resource('vote-candidate', VoteCandidate::class);
     Route::resource('verification', Verification::class);
     Route::resource('candidate', CandidateController::class);
-
+    Route::view('/candidate/edit/{candidateId}', "pages.candidate.edit")->name('candidate.edit');
 });
