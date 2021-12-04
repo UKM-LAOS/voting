@@ -17,7 +17,7 @@ class VoteCandidate extends Controller
     public function index()
     {
         if (Auth::user()->vote){
-            return redirect(route('admin.dashboard'))->with('status','anda telah menggunakan hak pilih anda');
+            return redirect(route('admin.dashboard'))->with('status','Anda telah menggunakan hak pilih Anda');
         }
         if (Auth::user()->userVerification->status!=2){
             return redirect(route('admin.dashboard'))->with('status','Anda belum terverifikasi sebagai pemilih');
@@ -58,14 +58,14 @@ class VoteCandidate extends Controller
     public function show($id)
     {
         if (Auth::user()->vote){
-            return redirect(route('admin.dashboard'))->with('status','anda telah menggunakan hak pilih anda');
+            return redirect(route('admin.dashboard'))->with('status','Anda telah menggunakan hak pilih Anda');
         }
         if (Auth::user()->userVerification->status!=2){
             return redirect(route('admin.dashboard'))->with('status','Anda belum terverifikasi sebagai pemilih');
         }
         $vote=Vote::create(['user_id'=>Auth::id(),'candidate_id'=>$id]);
 //        dd($vote);
-        return redirect(route('admin.dashboard'))->with('status','anda telah berhasil memilih terimakasih');
+        return redirect(route('admin.dashboard'))->with('status','Anda telah berhasil memilih. Terima kasih atas partisipasinya.');
     }
 
     /**
