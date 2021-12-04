@@ -20,12 +20,24 @@
                         <div class="article-image" data-background="{{asset('storage/candidate/'.$c->image)}}">
                         </div>
                         <div class="article-title">
-                            <h2><a href="#">{{$c->name}}</a></h2>
+                            <h2 class="text-white">{{$c->name}}</h2>
                         </div>
                     </div>
                     <div class="article-details">
+                        <div class="block mb-2">
+                            <strong>Angkatan/Prodi:</strong>
+                            <p>{{$c->year}}/{{$c->program_study}}</p>
+                        </div>
+                        <div class="block mb-2">
+                            <strong>Visi:</strong>
+                            <p>{{$c->visi}}</p>
+                        </div>
+                        <div class="block mb-2">
+                            <strong>Misi:</strong>
+                            <p>{!! nl2br($c->misi) !!}</p>
+                        </div>
                         <div class="article-cta">
-                            <a onclick="if (confirm('Apakah anda yakin memilih {{$c->name}}')){ window.location.href = '{{route('admin.vote-candidate.show',$c->id)}}'; }" class="btn btn-primary btn-lg" style="width: 100%">Pilih</a>
+                            <a onclick="if (confirm('Apakah anda yakin memilih {{$c->name}}?')){ window.location.href = '{{route('admin.vote-candidate.show',$c->id)}}'; }" class="btn btn-success btn-lg" style="width: 100%">Pilih</a>
                         </div>
                     </div>
                 </article>
