@@ -53,7 +53,7 @@
             </div>
 
             <div class="form-group col-span-6 sm:col-span-5">
-                <label for="file">{{__('Foto bersama KTM atau screenshot biodata SISTER')}}</label>
+                <label for="file">{{__('Foto KTM atau screenshot biodata SISTER')}}</label>
                 <input type="file" class="mt-1 block w-full form-control shadow-none @error('file') is-invalid @enderror" name="file" id="file" {{$user->status==2?'disabled':''}}/>
                 <img src="{{asset('storage/user-verification/'.$user->image)}}" style="max-height: 200px" alt="masih belum terisi">
                 @error('file')
