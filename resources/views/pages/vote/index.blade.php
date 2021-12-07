@@ -14,7 +14,7 @@
 
         <div class="row">
             @foreach($candidates as $c)
-            <div class="col-12 col-sm-6 col-md-3">
+            <div class="col-12 col-md-6">
                 <article class="article">
                     <div class="article-header" style="height: 350px">
                         <div class="article-image" data-background="{{asset('storage/candidate/'.$c->image)}}">

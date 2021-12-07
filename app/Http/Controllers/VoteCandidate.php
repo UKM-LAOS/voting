@@ -16,11 +16,24 @@ class VoteCandidate extends Controller
      */
     public function index()
     {
+        $vote_tz = $_ENV['VOTE_TIMEZONE'];
+        $vote_start_time = new \DateTime($_ENV['VOTE_START_DATETIME'], new \DateTimeZone($vote_tz));
+        $vote_end_time = new \DateTime($_ENV['VOTE_END_DATETIME'], new \DateTimeZone($vote_tz));
+        $current_time = new \DateTime('now');
+
         if (Auth::user()->vote){
             return redirect(route('admin.dashboard'))->with('status','Anda telah menggunakan hak pilih Anda');
         }
         if (Auth::user()->userVerification->status!=2){
             return redirect(route('admin.dashboard'))->with('status','Anda belum terverifikasi sebagai pemilih');
+        }
+
+        if ($current_time < $vote_start_time) {
+            return redirect(route('admin.dashboard'))->with('status','Menu pemilu akan dibuka pada '.$vote_start_time->format('d F Y H.i').' s.d. '.$vote_end_time->format('d F Y H.i'));
+        }
+
+        if ($current_time > $vote_end_time) {
+            return redirect(route('admin.dashboard'))->with('status','Pemilu telah berakhir, terima kasih atas partisipasinya!');
         }
 
         $candidates= Candidate::get();
@@ -57,14 +70,23 @@ class VoteCandidate extends Controller
      */
     public function show($id)
     {
+        $vote_tz = $_ENV['VOTE_TIMEZONE'];
+        $vote_start_time = new \DateTime($_ENV['VOTE_START_DATETIME'], new \DateTimeZone($vote_tz));
+        $vote_end_time = new \DateTime($_ENV['VOTE_END_DATETIME'], new \DateTimeZone($vote_tz));
+        $current_time = new \DateTime('now');
+
         if (Auth::user()->vote){
             return redirect(route('admin.dashboard'))->with('status','Anda telah menggunakan hak pilih Anda');
         }
         if (Auth::user()->userVerification->status!=2){
             return redirect(route('admin.dashboard'))->with('status','Anda belum terverifikasi sebagai pemilih');
         }
+
+        if ($current_time < $vote_start_time || $current_time > $vote_end_time) {
+            return redirect(route('admin.dashboard'))->with('status','Pemilu belum dibuka.');
+        }
+
         $vote=Vote::create(['user_id'=>Auth::id(),'candidate_id'=>$id]);
-//        dd($vote);
         return redirect(route('admin.dashboard'))->with('status','Anda telah berhasil memilih. Terima kasih atas partisipasinya.');
     }
 
