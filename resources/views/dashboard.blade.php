@@ -14,7 +14,7 @@
             <h1>Selamat Datang Sobat LAOS</h1>
             <p>
                 Silakan mengisi data diri pada menu Verification terlebih dahulu. Jika akun telah terverifikasi, silahkan pilih menu Pemilu untuk memilih calon ketua UKM LAOS.
-                Bersama kita sukseskan pemilihan calon ketua UKM LAOS Periode 2021/2022 untuk UKM LAOS yang lebih maju dan lebih baik
+                Bersama kita sukseskan pemilihan calon ketua UKM LAOS Periode 2022/2023 untuk UKM LAOS yang lebih maju dan lebih baik
             </p>
 
 
