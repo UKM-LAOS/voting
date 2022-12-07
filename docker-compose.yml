@@ -1,0 +1,11 @@
+services:
+  php-apache:
+    build: .
+    ports:
+      - '80:80'
+    volumes:
+      - ./.env:/var/www/html/.env
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - user-verification:/var/www/html/storage/app/public
+volumes:
+  user-verification:
