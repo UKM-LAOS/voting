@@ -20,6 +20,6 @@ COPY . .
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN a2enmod rewrite
 RUN composer install
-RUN chown -R www-data:www-data /var/www/html
+RUN mkdir -p storage/app/public/user-verification
 RUN php artisan storage:link
-
+RUN chown -R www-data:www-data /var/www/html
